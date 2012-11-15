@@ -8,8 +8,12 @@ package com.dwlarson.joshua.commands;
  */
 public class DriveWithJoystick extends CommandBase {
 	
-	protected void initialize() {
+	public DriveWithJoystick() {
 		requires(driveTrain);
+	}
+	
+	protected void initialize() {
+		
 	}
 	
 	protected void execute() {

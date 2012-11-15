@@ -7,8 +7,12 @@ package com.dwlarson.joshua.commands;
  */
 public class MoveBallIn extends CommandBase {
 	
-	protected void initialize() {
+	public MoveBallIn() {
 		requires(collector);
+	}
+	
+	protected void initialize() {
+		
 	}
 	
 	protected void execute() {

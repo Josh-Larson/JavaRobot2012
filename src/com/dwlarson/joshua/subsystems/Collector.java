@@ -1,6 +1,7 @@
 package com.dwlarson.joshua.subsystems;
 
 import com.dwlarson.joshua.RobotMap;
+import com.dwlarson.joshua.commands.OutputCollectorData;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Victor;
@@ -26,7 +27,7 @@ public class Collector extends Subsystem {
 	private double topIRVoltage;
 	
 	public void initDefaultCommand() {
-		
+		setDefaultCommand(new OutputCollectorData());
 	}
 	
 	public Collector() {
@@ -60,15 +61,15 @@ public class Collector extends Subsystem {
 	}
 	
 	public boolean frontTriggered() {
-		return topIR.getVoltage() > frontIRVoltage;
+		return frontIR.getVoltage() > frontIRVoltage;
 	}
 	
 	public boolean middleTriggered() {
-		return topIR.getVoltage() > middleIRVoltage;
+		return middleIR.getVoltage() > middleIRVoltage;
 	}
 	
 	public boolean transitionTriggered() {
-		return topIR.getVoltage() > transitionIRVoltage;
+		return transitionIR.getVoltage() > transitionIRVoltage;
 	}
 	
 	public boolean topTriggered() {
@@ -91,4 +92,35 @@ public class Collector extends Subsystem {
 		topIRVoltage = s;
 	}
 	
+	public double getFrontIR() {
+		return frontIR.getVoltage() - frontIRVoltage;
+	}
+	
+	public double getMiddleIR() {
+		return middleIR.getVoltage() - middleIRVoltage;
+	}
+	
+	public double getTransitionIR() {
+		return transitionIR.getVoltage() - transitionIRVoltage;
+	}
+	
+	public double getTopIR() {
+		return topIR.getVoltage() - topIRVoltage;
+	}
+	
+	public double getRawFrontIR() {
+		return frontIR.getVoltage();
+	}
+	
+	public double getRawMiddleIR() {
+		return middleIR.getVoltage();
+	}
+	
+	public double getRawTransitionIR() {
+		return transitionIR.getVoltage();
+	}
+	
+	public double getRawTopIR() {
+		return topIR.getVoltage();
+	}
 }

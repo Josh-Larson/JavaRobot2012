@@ -26,18 +26,17 @@ public class RampManipulator extends Subsystem {
 	}
 	
 	public void moveRampUp() {
-		victor.set(1.0);
-		relay.set(Relay.Value.kOn);
+		victor.set(-0.3);
+		//relay.set(Relay.Value.kOn);
 	}
 	
 	public void moveRampDown() {
-		victor.set(-1.0);
-		relay.set(Relay.Value.kReverse);
+		victor.set(0.3);
+		//relay.set(Relay.Value.kReverse);
 	}
 	
 	public void noMoveRamp() {
 		victor.set(0);
-		relay.set(Relay.Value.kOff);
+		//relay.set(Relay.Value.kOff);
 	}
-	
 }

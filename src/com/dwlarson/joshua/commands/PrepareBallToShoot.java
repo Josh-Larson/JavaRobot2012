@@ -7,8 +7,11 @@ package com.dwlarson.joshua.commands;
  */
 public class PrepareBallToShoot extends CommandBase {
 	
-	public void initialize() {
+	public PrepareBallToShoot() {
 		requires(collector);
+	}
+	
+	public void initialize() {
 		setTimeout(4.0);
 	}
 	

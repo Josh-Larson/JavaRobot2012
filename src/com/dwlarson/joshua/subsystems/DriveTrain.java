@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *  The drive train for the robot. This will
@@ -27,17 +28,21 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public DriveTrain() {
-		leftJaguar   = new Jaguar(RobotMap.DRIVETRAIN_JAGUAR_LEFT);
-		rightJaguar  = new Jaguar(RobotMap.DRIVETRAIN_JAGUAR_RIGHT);
+		leftJaguar   = new Jaguar(1, RobotMap.DRIVETRAIN_JAGUAR_LEFT);
+		rightJaguar  = new Jaguar(1, RobotMap.DRIVETRAIN_JAGUAR_RIGHT);
 		leftEncoder  = new Encoder(RobotMap.DRIVETRAIN_ENCODER_LEFT_A, RobotMap.DRIVETRAIN_ENCODER_LEFT_B);
 		rightEncoder = new Encoder(RobotMap.DRIVETRAIN_ENCODER_RIGHT_A, RobotMap.DRIVETRAIN_ENCODER_RIGHT_B);
+		leftJaguar.setSafetyEnabled(false);
+		rightJaguar.setSafetyEnabled(false);
 	}
 	
 	public void driveWithJoystick(boolean arcade, Joystick j1, Joystick j2) {
 		if (arcade) {
 			if (j1 == null) return;
-			double rot = j1.getAxis(Joystick.AxisType.kTwist);
+			double rot = j1.getAxis(Joystick.AxisType.kX);
 			double y = j1.getAxis(Joystick.AxisType.kY);
+			SmartDashboard.putDouble("X", rot);
+			SmartDashboard.putDouble("Y", y);
 			arcadeDrive(rot, y * y * y);
 		} else {
 			if (j1 == null || j2 == null) return;
@@ -50,6 +55,8 @@ public class DriveTrain extends Subsystem {
 	private void arcadeDrive(double rot, double speed) {
 		leftJaguar.set(rot - speed);
 		rightJaguar.set(-1 * rot - speed);
+		SmartDashboard.putDouble("LeftJaguar", leftJaguar.get());
+		SmartDashboard.putDouble("RightJaguar", rightJaguar.get());
 	}
 	
 	private void tankDrive(double y1, double y2) {

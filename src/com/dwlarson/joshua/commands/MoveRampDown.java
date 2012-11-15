@@ -6,21 +6,24 @@ package com.dwlarson.joshua.commands;
  */
 public class MoveRampDown extends CommandBase {
 	
-	
-	protected void initialize() {
+	public MoveRampDown() {
 		requires(rampManipulator);
 	}
 	
-	protected void execute() {
+	protected void initialize() {
 		rampManipulator.moveRampDown();
 	}
 	
+	protected void execute() {
+		
+	}
+	
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	
 	protected void end() {
-		rampManipulator.noMoveRamp();
+		
 	}
 	
 	protected void interrupted() {

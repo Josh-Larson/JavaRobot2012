@@ -7,9 +7,12 @@ package com.dwlarson.joshua.commands;
  */
 public class MoveBallDown extends CommandBase {
 	
+	public MoveBallDown() {
+		requires(collector);
+	}
 	
 	public void initialize() {
-		requires(collector);
+		
 	}
 	
 	public void execute() {

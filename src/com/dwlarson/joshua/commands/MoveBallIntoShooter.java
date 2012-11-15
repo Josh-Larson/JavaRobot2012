@@ -8,8 +8,11 @@ public class MoveBallIntoShooter extends CommandBase {
 	
 	private boolean ballLoaded = false;
 	
-	public void initialize() {
+	public MoveBallIntoShooter() {
 		requires(collector);
+	}
+	
+	public void initialize() {
 		setTimeout(4.0);
 	}
 	

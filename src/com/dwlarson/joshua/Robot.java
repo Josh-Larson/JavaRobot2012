@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import com.dwlarson.joshua.commands.CommandBase;
 import com.dwlarson.joshua.commands.AutonomousCommands;
 import com.dwlarson.joshua.commands.OperatorCommands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,9 +25,8 @@ import com.dwlarson.joshua.commands.OperatorCommands;
  */
 public class Robot extends IterativeRobot {
 	
-	private Command autonomousCommands;
+	//private Command autonomousCommands;
 	private Command teleopCommands;
-	private Scheduler scheduler;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		// Create the two commands that are for OperatorControl and Autonomous
-		autonomousCommands = new AutonomousCommands();
+		//autonomousCommands = new AutonomousCommands();
 		teleopCommands     = new OperatorCommands();
 		
 		// Initialize all subsystems
@@ -46,28 +46,29 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 		teleopCommands.cancel();
-		autonomousCommands.start();
+		//autonomousCommands.start();
 	}
 	
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		scheduler.run();
+		//scheduler.run();
 	}
 	
 	/**
 	 * This function is called when the teleoperated period begins
 	 */
 	public void teleopInit() {
-		autonomousCommands.cancel();
+		//autonomousCommands.cancel();
 		teleopCommands.start();
+		System.out.println("Initialized Teleop");
 	}
 	
 	/**
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		scheduler.run();
+		Scheduler.getInstance().run();
 	}
 }

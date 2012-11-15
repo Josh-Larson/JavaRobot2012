@@ -62,15 +62,15 @@ public class Shooter extends Subsystem {
     }
 
     private double getSpinForDistance(double distance) {
-	return 1.827142857e-2 * distance - 0.19;
+		return 1.827142857e-2 * distance - 0.19;
     }
 
     public void fireUpPID(double speed, int shots) {
-	topPID.setSetpoint(-1 * ratio * speed);
-	bottomPID.setSetpoint(-1 * speed);
-
-	topPID.enable();
-	bottomPID.enable();
+		topPID.setSetpoint(-1 * ratio * speed);
+		bottomPID.setSetpoint(-1 * speed);
+		
+		topPID.enable();
+		bottomPID.enable();
     }
     
     public boolean isSpeedClose() {

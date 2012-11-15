@@ -1,13 +1,20 @@
 
 package com.dwlarson.joshua;
 
+import com.dwlarson.joshua.commands.CalibrateCollector;
 import com.dwlarson.joshua.commands.MoveRampDown;
 import com.dwlarson.joshua.commands.MoveRampUp;
 import com.dwlarson.joshua.commands.ShootBall;
 import com.dwlarson.joshua.commands.ToggleTankArcade;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.NetworkButton;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Stands for Operator Interface, this class holds the buttons
@@ -24,9 +31,11 @@ public class OI {
 	private JoystickButton rampUpButton;
 	private JoystickButton tankToggleButton;
 	private JoystickButton rampDownButton;
-	
+	private InternalButton calibrateButton;
 	
 	public OI() {
+		NetworkTable.initialize();
+		
 		joy1 = new Joystick(RobotMap.COMPUTER_JOYSTICK1);
 		joy2 = new Joystick(RobotMap.COMPUTER_JOYSTICK2);
 		
@@ -34,11 +43,15 @@ public class OI {
 		rampUpButton     = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_UP);
 		tankToggleButton = new JoystickButton(joy1, RobotMap.JOYSTICK_TANK_ARCADE_TOGGLE);
 		rampDownButton   = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_DOWN);
+		calibrateButton  = new InternalButton();
+		
+		SmartDashboard.putData("Calibrate", calibrateButton);
 		
 		shootButton.whenReleased(new ShootBall());
 		rampUpButton.whileHeld(new MoveRampUp());
 		tankToggleButton.whenReleased(new ToggleTankArcade());
 		rampDownButton.whileHeld(new MoveRampDown());
+		calibrateButton.whenPressed(new CalibrateCollector());
 	}
 	
 	public Joystick getJoystick1() {

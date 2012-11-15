@@ -10,8 +10,11 @@ import com.dwlarson.joshua.RobotMap;
  */
 public class GetShooterUpToSpeed extends CommandBase {
 	
-	public void initialize() {
+	public GetShooterUpToSpeed() {
 		requires(shooter);
+	}
+	
+	public void initialize() {
 		setTimeout(7.0);
 	}
 	

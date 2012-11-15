@@ -6,8 +6,12 @@ package com.dwlarson.joshua.commands;
  */
 public class NoMoveRamp extends CommandBase {
 	
-	protected void initialize() {
+	public NoMoveRamp() {
 		requires(rampManipulator);
+	}
+	
+	protected void initialize() {
+		
 	}
 	
 	protected void execute() {
