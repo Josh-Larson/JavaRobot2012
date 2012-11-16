@@ -7,7 +7,6 @@ import com.dwlarson.joshua.subsystems.Collector;
 import com.dwlarson.joshua.subsystems.DriveTrain;
 import com.dwlarson.joshua.subsystems.RampManipulator;
 import com.dwlarson.joshua.subsystems.Shooter;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.

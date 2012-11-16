@@ -1,7 +1,7 @@
 package com.dwlarson.joshua.subsystems;
 
 import com.dwlarson.joshua.RobotMap;
-import com.dwlarson.joshua.commands.NoMoveRamp;
+import com.dwlarson.joshua.commands.ramp_manipulator.NoMoveRamp;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Victor;

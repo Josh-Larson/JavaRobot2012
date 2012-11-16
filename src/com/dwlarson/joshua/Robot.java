@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import com.dwlarson.joshua.commands.CommandBase;
 import com.dwlarson.joshua.commands.AutonomousCommands;
-import com.dwlarson.joshua.commands.DisableRobot;
 import com.dwlarson.joshua.commands.OperatorCommands;
 
 /**

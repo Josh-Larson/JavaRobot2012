@@ -1,21 +1,16 @@
 
 package com.dwlarson.joshua;
 
-import com.dwlarson.joshua.commands.CalibrateCollector;
-import com.dwlarson.joshua.commands.DisableRobot;
-import com.dwlarson.joshua.commands.DisabledButton;
-import com.dwlarson.joshua.commands.MoveRampDown;
-import com.dwlarson.joshua.commands.MoveRampUp;
-import com.dwlarson.joshua.commands.ShootBall;
-import com.dwlarson.joshua.commands.ToggleTankArcade;
+import com.dwlarson.joshua.commands.ramp_manipulator.MoveRampDown;
+import com.dwlarson.joshua.commands.ramp_manipulator.MoveRampUp;
+import com.dwlarson.joshua.commands.shooter.ShootBall;
+import com.dwlarson.joshua.commands.drive_train.ToggleTankArcade;
+import com.dwlarson.joshua.commands.collector.CalibrateCollector;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.NetworkButton;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -34,7 +29,6 @@ public class OI {
 	private JoystickButton tankToggleButton;
 	private JoystickButton rampDownButton;
 	private InternalButton calibrateButton;
-	private DisabledButton disableButton;
 	
 	public OI() {
 		NetworkTable.initialize();
@@ -47,7 +41,6 @@ public class OI {
 		tankToggleButton = new JoystickButton(joy1, RobotMap.JOYSTICK_TANK_ARCADE_TOGGLE);
 		rampDownButton   = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_DOWN);
 		calibrateButton  = new InternalButton();
-		disableButton    = new DisabledButton();
 		
 		SmartDashboard.putData("Calibrate", calibrateButton);
 		
@@ -56,7 +49,6 @@ public class OI {
 		tankToggleButton.whenReleased(new ToggleTankArcade());
 		rampDownButton.whileHeld(new MoveRampDown());
 		calibrateButton.whenPressed(new CalibrateCollector());
-		//disableButton.whileHeld(new DisableRobot());
 	}
 	
 	public Joystick getJoystick1() {

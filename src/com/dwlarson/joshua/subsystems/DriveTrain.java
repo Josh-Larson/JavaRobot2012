@@ -2,7 +2,7 @@
 package com.dwlarson.joshua.subsystems;
 
 import com.dwlarson.joshua.RobotMap;
-import com.dwlarson.joshua.commands.DriveWithJoystick;
+import com.dwlarson.joshua.commands.drive_train.DriveWithJoystick;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;

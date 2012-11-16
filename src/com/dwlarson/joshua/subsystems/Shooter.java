@@ -2,7 +2,7 @@ package com.dwlarson.joshua.subsystems;
 
 import com.dwlarson.joshua.RobotMap;
 import com.dwlarson.joshua.SingleChannelEncoder;
-import com.dwlarson.joshua.commands.OutputShooterData;
+import com.dwlarson.joshua.commands.shooter.OutputShooterData;
 
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.PIDController;

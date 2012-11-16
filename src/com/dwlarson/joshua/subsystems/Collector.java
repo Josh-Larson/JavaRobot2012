@@ -1,8 +1,7 @@
 package com.dwlarson.joshua.subsystems;
 
 import com.dwlarson.joshua.RobotMap;
-import com.dwlarson.joshua.commands.CollectorRunning;
-import com.dwlarson.joshua.commands.OutputCollectorData;
+import com.dwlarson.joshua.commands.collector.CollectorRunning;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Victor;
