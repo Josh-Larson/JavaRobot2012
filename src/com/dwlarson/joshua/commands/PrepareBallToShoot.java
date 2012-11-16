@@ -1,5 +1,7 @@
 package com.dwlarson.joshua.commands;
 
+import com.dwlarson.joshua.Robot;
+
 /**
  * Prepares the next ball for shooting by moving a ball up
  * until it is detected at the top.
@@ -24,7 +26,7 @@ public class PrepareBallToShoot extends CommandBase {
 	}
 	
 	public boolean isFinished() {
-		return collector.topTriggered();
+		return collector.topTriggered() || Robot.disabled;
 	}
 	
 	public void interrupted() {

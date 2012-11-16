@@ -22,6 +22,10 @@ public class OutputCollectorData extends CommandBase {
 		SmartDashboard.putDouble("Middle IR", collector.getMiddleIR());
 		SmartDashboard.putDouble("Transition IR", collector.getTransitionIR());
 		SmartDashboard.putDouble("Top IR", collector.getTopIR());
+		SmartDashboard.putBoolean("Front IR Triggered", collector.frontTriggered());
+		SmartDashboard.putBoolean("Middle IR Triggered", collector.middleTriggered());
+		SmartDashboard.putBoolean("Transition IR Triggered", collector.transitionTriggered());
+		SmartDashboard.putBoolean("Top IR Triggered", collector.topTriggered());
 	}
 	
 	protected boolean isFinished() {

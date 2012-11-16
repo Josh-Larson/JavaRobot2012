@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import com.dwlarson.joshua.commands.CommandBase;
 import com.dwlarson.joshua.commands.AutonomousCommands;
+import com.dwlarson.joshua.commands.DisableRobot;
 import com.dwlarson.joshua.commands.OperatorCommands;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,8 +25,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	
-	//private Command autonomousCommands;
+	private Command autonomousCommands;
 	private Command teleopCommands;
+	public static boolean disabled = true;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -34,7 +35,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		// Create the two commands that are for OperatorControl and Autonomous
-		//autonomousCommands = new AutonomousCommands();
+		autonomousCommands = new AutonomousCommands();
 		teleopCommands     = new OperatorCommands();
 		
 		// Initialize all subsystems
@@ -46,23 +47,25 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 		teleopCommands.cancel();
-		//autonomousCommands.start();
+		autonomousCommands.start();
+		Robot.disabled = false;
 	}
 	
 	/**
 	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
-		//scheduler.run();
+		Scheduler.getInstance().run();
 	}
 	
 	/**
-	 * This function is called when the teleoperated period begins
+	 * This function is called when the tele operated period begins
 	 */
 	public void teleopInit() {
-		//autonomousCommands.cancel();
+		autonomousCommands.cancel();
 		teleopCommands.start();
 		System.out.println("Initialized Teleop");
+		Robot.disabled = false;
 	}
 	
 	/**
@@ -70,5 +73,12 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+	}
+	
+	/**
+	 * Called when the robot is disabled
+	 */
+	public void disabledInit() {
+		Robot.disabled = true;
 	}
 }

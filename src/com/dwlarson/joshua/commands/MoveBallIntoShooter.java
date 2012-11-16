@@ -1,5 +1,7 @@
 package com.dwlarson.joshua.commands;
 
+import com.dwlarson.joshua.Robot;
+
 /**
  * Move the ball up until the ball gets out of the lifter.
  * @author Josh Larson
@@ -28,7 +30,7 @@ public class MoveBallIntoShooter extends CommandBase {
 	}
 	
 	public boolean isFinished() {
-		return !collector.topTriggered() && ballLoaded;
+		return (!collector.topTriggered() && ballLoaded) || Robot.disabled;
 	}
 	
 	public void interrupted() {

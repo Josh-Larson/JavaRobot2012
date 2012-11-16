@@ -36,6 +36,11 @@ public class DriveTrain extends Subsystem {
 		rightJaguar.setSafetyEnabled(false);
 	}
 	
+	public void disable() {
+		leftJaguar.set(0);
+		rightJaguar.set(0);
+	}
+	
 	public void driveWithJoystick(boolean arcade, Joystick j1, Joystick j2) {
 		if (arcade) {
 			if (j1 == null) return;

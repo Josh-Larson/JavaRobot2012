@@ -1,5 +1,6 @@
 package com.dwlarson.joshua.commands;
 
+import com.dwlarson.joshua.Robot;
 import com.dwlarson.joshua.RobotMap;
 
 /**
@@ -16,18 +17,19 @@ public class GetShooterUpToSpeed extends CommandBase {
 	
 	public void initialize() {
 		setTimeout(7.0);
-	}
-	
-	public void execute() {
 		shooter.fireUpPID(RobotMap.SHOOTER_SPEED_CONSTANT, 1);
 	}
 	
-	public void end() {
+	public void execute() {
 		
 	}
 	
+	public void end() {
+		shooter.disable();
+	}
+	
 	public boolean isFinished() {
-		return shooter.isSpeedClose();
+		return shooter.isSpeedClose() || Robot.disabled;
 	}
 	
 	public void interrupted() {
