@@ -36,11 +36,11 @@ public class Shooter extends Subsystem {
 		topEncoder = new SingleChannelEncoder(
 			RobotMap.SHOOTER_ENCODER_TOP_A,
 			RobotMap.SHOOTER_ENCODER_PULSES_SEC,
-			top);
+			null);
 		bottomEncoder = new SingleChannelEncoder(
 			RobotMap.SHOOTER_ENCODER_BOTTOM_A,
 			RobotMap.SHOOTER_ENCODER_PULSES_SEC,
-			bottom);
+			null);
 		topPID = new PIDController(.12, .013, 0.0, topEncoder, top);
 		bottomPID = new PIDController(.12, .026, 0.0, bottomEncoder, bottom);
 		topPID.setSetpoint(0);

@@ -27,15 +27,6 @@ public class Robot extends IterativeRobot {
 	private Command autonomousCommands;
 	private Command teleopCommands;
 	public static boolean disabled = true;
-	public static double goalCpuUsage = 100.0;
-	public static int splitCPU = 0;
-	
-	public static long sleepTime(long usedTime) {
-		if (splitCPU == 0) return (long) (goalCpuUsage);
-		long sleep = (long) (goalCpuUsage / splitCPU / 5);
-		if (sleep < 0) sleep = 0;
-		return sleep;
-	}
 	
 	/**
 	 * This function is run when the robot is first started up and should be

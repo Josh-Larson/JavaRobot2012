@@ -13,6 +13,7 @@ public class MoveBallIntoCollector extends CommandBase {
 	
 	public MoveBallIntoCollector() {
 		requires(collector);
+		setTimeout(0.05);
 	}
 	
 	protected void initialize() {
@@ -57,11 +58,11 @@ public class MoveBallIntoCollector extends CommandBase {
 	protected void execute() {
 		
 	}
-
+	
 	protected boolean isFinished() {
-		return true;
+		return isTimedOut();
 	}
-
+	
 	protected void end() {
 		
 	}

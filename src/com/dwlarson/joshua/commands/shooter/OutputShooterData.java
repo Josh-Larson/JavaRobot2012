@@ -1,8 +1,8 @@
 package com.dwlarson.joshua.commands.shooter;
 
-import com.dwlarson.joshua.Robot;
 import com.dwlarson.joshua.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -11,19 +11,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OutputShooterData extends CommandBase {
 	
+	private Timer timer;
+	
 	public OutputShooterData() {
 		requires(shooter);
+		timer = new Timer();
+		timer.reset();
+		timer.start();
 	}
 	
 	protected void initialize() {
-		Robot.splitCPU++;
+		SmartDashboard.putString("Debug", "1");
 	}
 	
 	protected void execute() {
-		long startTime = System.currentTimeMillis();
-		SmartDashboard.putDouble("Top Shooter", shooter.getTopRate());
-		SmartDashboard.putDouble("Bottom Shooter", shooter.getBottomRate());
-		try { Thread.sleep(Robot.sleepTime(System.currentTimeMillis() - startTime)); } catch (InterruptedException e) { }
+		if (timer.get() >= 0.1) {
+			SmartDashboard.putDouble("Top Shooter", shooter.getTopRate());
+			SmartDashboard.putDouble("Bottom Shooter", shooter.getBottomRate());
+			//SmartDashboard.putString("Debug", "2");
+			timer.reset();
+		}
 	}
 	
 	protected boolean isFinished() {
@@ -31,7 +38,7 @@ public class OutputShooterData extends CommandBase {
 	}
 	
 	protected void end() {
-		Robot.splitCPU--;
+		
 	}
 	
 	protected void interrupted() {

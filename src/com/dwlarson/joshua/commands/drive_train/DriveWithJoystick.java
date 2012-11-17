@@ -1,7 +1,8 @@
 package com.dwlarson.joshua.commands.drive_train;
 
-import com.dwlarson.joshua.Robot;
 import com.dwlarson.joshua.commands.CommandBase;
+
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The command used to drive with the joystick in operator
@@ -11,18 +12,24 @@ import com.dwlarson.joshua.commands.CommandBase;
  */
 public class DriveWithJoystick extends CommandBase {
 	
+	private Timer timer;
+	
 	public DriveWithJoystick() {
 		requires(driveTrain);
+		timer = new Timer();
+		timer.reset();
+		timer.start();
 	}
 	
 	protected void initialize() {
-		Robot.splitCPU++;
+		
 	}
 	
 	protected void execute() {
-		long startTime = System.currentTimeMillis();
-		driveTrain.driveWithJoystick(oi.isArcadeDrive(), oi.getJoystick1(), oi.getJoystick2());
-		try { Thread.sleep(Robot.sleepTime(System.currentTimeMillis() - startTime)); } catch (InterruptedException e) { }
+		if (timer.get() >= 0.05) {
+			driveTrain.driveWithJoystick(oi.isArcadeDrive(), oi.getJoystick1(), oi.getJoystick2());
+			timer.reset();
+		}
 	}
 	
 	protected boolean isFinished() {
@@ -30,7 +37,7 @@ public class DriveWithJoystick extends CommandBase {
 	}
 	
 	protected void end() {
-		Robot.splitCPU--;
+		
 	}
 	
 	protected void interrupted() {
