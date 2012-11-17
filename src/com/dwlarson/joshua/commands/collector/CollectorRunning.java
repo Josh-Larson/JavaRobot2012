@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CollectorRunning extends CommandGroup {
 	public CollectorRunning() {
-		addSequential(new MoveBallThroughCollector());
+		addSequential(new MoveBallIntoCollector());
 		addSequential(new OutputCollectorData());
 	}
 }

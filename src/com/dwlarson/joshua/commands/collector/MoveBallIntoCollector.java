@@ -6,34 +6,32 @@ import com.dwlarson.joshua.commands.CommandBase;
  *
  * @author Josh Larson
  */
-public class MoveBallThroughCollector extends CommandBase {
+public class MoveBallIntoCollector extends CommandBase {
 	
-	public MoveBallThroughCollector() {
+	public MoveBallIntoCollector() {
 		requires(collector);
 	}
 	
 	protected void initialize() {
+		System.out.print("Disable?");
+		if (collector.noneTriggered()) {
+			collector.disable();
+			System.out.println("  Yes, diabled.");
+			return;
+		}
 		if (!collector.isCalibrated()) return;
-		boolean anyMoved = false;
 		if (collector.frontTriggered()) {
 			collector.moveIn();
-			anyMoved = true;
 		}
 		if (collector.middleTriggered()) {
 			collector.moveIn();
 			collector.moveUp();
-			anyMoved = true;
 		}
 		if (collector.transitionTriggered()) {
 			collector.disable();
 			collector.moveUp();
-			anyMoved = true;
 		}
 		if (collector.topTriggered()) {
-			collector.disable();
-			anyMoved = true;
-		}
-		if (!anyMoved) {
 			collector.disable();
 		}
 	}

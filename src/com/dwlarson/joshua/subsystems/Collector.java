@@ -102,19 +102,23 @@ public class Collector extends Subsystem {
 	}
 	
 	public boolean frontTriggered() {
-		return frontIR.getVoltage() > frontIRBallVoltage;
+		return getFrontIR() > 0;
 	}
 	
 	public boolean middleTriggered() {
-		return middleIR.getVoltage() > middleIRBallVoltage;
+		return getMiddleIR()  > 0;
 	}
 	
 	public boolean transitionTriggered() {
-		return transitionIR.getVoltage() > transitionIRBallVoltage;
+		return getTransitionIR() > 0;
 	}
 	
 	public boolean topTriggered() {
-		return topIR.getVoltage() > topIRBallVoltage;
+		return getTopIR() > 0;
+	}
+	
+	public boolean noneTriggered() {
+		return !frontTriggered() && !middleTriggered() && !transitionTriggered() && !topTriggered();
 	}
 	
 	public void setFrontSensitivity(double s) {
@@ -163,21 +167,5 @@ public class Collector extends Subsystem {
 	
 	public double getRawTopIR() {
 		return topIR.getVoltage();
-	}
-	
-	public void setFrontBallSensitivity(double s) {
-		frontIRBallVoltage = s;
-	}
-	
-	public void setMiddleBallSensitivity(double s) {
-		middleIRBallVoltage = s;
-	}
-	
-	public void setTransitionBallSensitivity(double s) {
-		transitionIRBallVoltage = s;
-	}
-	
-	public void setTopBallSensitivity(double s) {
-		topIRBallVoltage = s;
 	}
 }
