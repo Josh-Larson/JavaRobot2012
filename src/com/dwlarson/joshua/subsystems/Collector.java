@@ -25,10 +25,7 @@ public class Collector extends Subsystem {
 	private double middleIRVoltage;
 	private double transitionIRVoltage;
 	private double topIRVoltage;
-	private double frontIRBallVoltage;
-	private double middleIRBallVoltage;
-	private double transitionIRBallVoltage;
-	private double topIRBallVoltage;
+	private int [] triggerInRow;
 	private boolean calibrated;
 	
 	public void initDefaultCommand() {
@@ -50,15 +47,20 @@ public class Collector extends Subsystem {
 		transitionIRVoltage = 0;
 		topIRVoltage = 0;
 		
-		frontIRBallVoltage = 0;
-		middleIRBallVoltage = 0;
-		transitionIRBallVoltage = 0;
-		topIRVoltage = 0;
+		triggerInRow = new int[4];
 	}
 	
 	public void disable() {
 		lifter.set(0);
 		grabber.set(0);
+	}
+	
+	public void disableGrabber() {
+		grabber.set(0);
+	}
+	
+	public void disableLifter() {
+		lifter.set(0);
 	}
 	
 	public void moveIn() {
@@ -102,23 +104,67 @@ public class Collector extends Subsystem {
 	}
 	
 	public boolean frontTriggered() {
-		return getFrontIR() > 0;
+		if (getFrontIR() > 0) {
+			triggerInRow[0]++;
+			return true;
+		} else {
+			triggerInRow[0] = 0;
+			return false;
+		}
 	}
 	
 	public boolean middleTriggered() {
-		return getMiddleIR()  > 0;
+		if (getMiddleIR() > 0) {
+			triggerInRow[1]++;
+			return true;
+		} else {
+			triggerInRow[1] = 0;
+			return false;
+		}
 	}
 	
 	public boolean transitionTriggered() {
-		return getTransitionIR() > 0;
+		if (getTransitionIR() > 0) {
+			triggerInRow[2]++;
+			return true;
+		} else {
+			triggerInRow[2] = 0;
+			return false;
+		}
 	}
 	
 	public boolean topTriggered() {
-		return getTopIR() > 0;
+		if (getTopIR() > 0) {
+			triggerInRow[3]++;
+			return true;
+		} else {
+			triggerInRow[3] = 0;
+			return false;
+		}
+	}
+	
+	public boolean frontTriggered(int trigger) {
+		frontTriggered();
+		return triggerInRow[0] >= trigger;
+	}
+	
+	public boolean middleTriggered(int trigger) {
+		middleTriggered();
+		return triggerInRow[1] >= trigger;
+	}
+	
+	public boolean transitionTriggered(int trigger) {
+		transitionTriggered();
+		return triggerInRow[2] >= trigger;
+	}
+	
+	public boolean topTriggered(int trigger) {
+		topTriggered();
+		return triggerInRow[3] >= trigger;
 	}
 	
 	public boolean noneTriggered() {
-		return !frontTriggered() && !middleTriggered() && !transitionTriggered() && !topTriggered();
+		return !(frontTriggered() && middleTriggered() && transitionTriggered() && topTriggered());
 	}
 	
 	public void setFrontSensitivity(double s) {

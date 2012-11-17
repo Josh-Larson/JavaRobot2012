@@ -6,6 +6,7 @@ import com.dwlarson.joshua.commands.ramp_manipulator.MoveRampUp;
 import com.dwlarson.joshua.commands.shooter.ShootBall;
 import com.dwlarson.joshua.commands.drive_train.ToggleTankArcade;
 import com.dwlarson.joshua.commands.collector.CalibrateCollector;
+import com.dwlarson.joshua.commands.collector.MoveBallOutCollector;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
@@ -28,6 +29,7 @@ public class OI {
 	private JoystickButton rampUpButton;
 	private JoystickButton tankToggleButton;
 	private JoystickButton rampDownButton;
+	private JoystickButton ejectButton;
 	private InternalButton calibrateButton;
 	
 	public OI() {
@@ -40,6 +42,7 @@ public class OI {
 		rampUpButton     = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_UP);
 		tankToggleButton = new JoystickButton(joy1, RobotMap.JOYSTICK_TANK_ARCADE_TOGGLE);
 		rampDownButton   = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_DOWN);
+		ejectButton      = new JoystickButton(joy1, RobotMap.JOYSTICK_EJECT_BALLS);
 		calibrateButton  = new InternalButton();
 		
 		SmartDashboard.putData("Calibrate", calibrateButton);
@@ -49,6 +52,7 @@ public class OI {
 		tankToggleButton.whenReleased(new ToggleTankArcade());
 		rampDownButton.whileHeld(new MoveRampDown());
 		calibrateButton.whenPressed(new CalibrateCollector());
+		ejectButton.whileHeld(new MoveBallOutCollector());
 	}
 	
 	public Joystick getJoystick1() {

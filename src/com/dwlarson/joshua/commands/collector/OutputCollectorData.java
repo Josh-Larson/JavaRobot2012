@@ -1,5 +1,6 @@
 package com.dwlarson.joshua.commands.collector;
 
+import com.dwlarson.joshua.Robot;
 import com.dwlarson.joshua.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,24 +11,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OutputCollectorData extends CommandBase {
 	
-	private double [] voltages;
-	
 	public OutputCollectorData() {
 		requires(collector);
-		voltages = new double[4];
 	}
 	
 	protected void initialize() {
-		
-	}
-	
-	protected void execute() {
+		double [] voltages = new double[4];
 		for (int s = 0; s < 50; s++) {
 			voltages[0] += collector.getFrontIR();
 			voltages[1] += collector.getMiddleIR();
 			voltages[2] += collector.getTransitionIR();
 			voltages[3] += collector.getTopIR();
-			try { Thread.sleep(1); } catch (InterruptedException e) { }
 		}
 		for (int i = 0; i < 4; i++)
 			voltages[i] /= 50;
@@ -40,10 +34,15 @@ public class OutputCollectorData extends CommandBase {
 		SmartDashboard.putBoolean("Middle IR Triggered", collector.middleTriggered());
 		SmartDashboard.putBoolean("Transition IR Triggered", collector.transitionTriggered());
 		SmartDashboard.putBoolean("Top IR Triggered", collector.topTriggered());
+		try { Thread.sleep(1); } catch (InterruptedException e) { }
+	}
+	
+	protected void execute() {
+		
 	}
 	
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 	
 	protected void end() {

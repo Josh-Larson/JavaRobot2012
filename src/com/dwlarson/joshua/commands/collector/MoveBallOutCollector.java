@@ -3,15 +3,15 @@ package com.dwlarson.joshua.commands.collector;
 import com.dwlarson.joshua.commands.CommandBase;
 
 /**
- * Moves the ball in the collector depending on which
+ * Moves the ball out of the collector depending on which
  * sensors are activated
  * @author Josh Larson
  */
-public class MoveBallIntoCollector extends CommandBase {
+public class MoveBallOutCollector extends CommandBase {
 	
 	private static int triggeredInRow = 5;
 	
-	public MoveBallIntoCollector() {
+	public MoveBallOutCollector() {
 		requires(collector);
 	}
 	
@@ -24,48 +24,39 @@ public class MoveBallIntoCollector extends CommandBase {
 		boolean middle     = collector.middleTriggered(triggeredInRow);
 		boolean transition = collector.transitionTriggered(triggeredInRow);
 		boolean top        = collector.topTriggered(triggeredInRow);
-		boolean moved      = false;
 		
-		if (!front && middle) {
-			collector.moveUp();
-			moved = true;
-		}
-		if (front || middle) {
-			collector.moveIn();
-			moved = true;
-		}
-		if (!front && !middle) {
-			collector.disableGrabber();
-			moved = false;
+		collector.moveDown();
+		
+		if (top) {
+			collector.moveDown();
 		}
 		
 		if (transition) {
-			collector.moveUp();
-			try { Thread.sleep(1000); } catch (InterruptedException e) { }
-			moved = true;
+			collector.moveOut();
 		}
 		
-		if (top) {
+		if (middle) {
 			collector.disableLifter();
+			collector.moveOut();
 		}
 		
-		if (!moved) {
-			collector.disable();
+		if (front) {
+			collector.moveOut();
 		}
 	}
 	
 	protected void execute() {
 		
 	}
-
+	
 	protected boolean isFinished() {
 		return true;
 	}
-
+	
 	protected void end() {
 		
 	}
-
+	
 	protected void interrupted() {
 		
 	}
