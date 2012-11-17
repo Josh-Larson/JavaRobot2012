@@ -17,14 +17,14 @@ public class OutputCollectorData extends CommandBase {
 	
 	protected void initialize() {
 		double [] voltages = new double[4];
-		for (int s = 0; s < 50; s++) {
+		for (int s = 0; s < 10; s++) {
 			voltages[0] += collector.getFrontIR();
 			voltages[1] += collector.getMiddleIR();
 			voltages[2] += collector.getTransitionIR();
 			voltages[3] += collector.getTopIR();
 		}
 		for (int i = 0; i < 4; i++)
-			voltages[i] /= 50;
+			voltages[i] /= 10;
 		
 		SmartDashboard.putDouble("Front IR", voltages[0]);
 		SmartDashboard.putDouble("Middle IR", voltages[1]);
@@ -34,7 +34,6 @@ public class OutputCollectorData extends CommandBase {
 		SmartDashboard.putBoolean("Middle IR Triggered", collector.middleTriggered());
 		SmartDashboard.putBoolean("Transition IR Triggered", collector.transitionTriggered());
 		SmartDashboard.putBoolean("Top IR Triggered", collector.topTriggered());
-		try { Thread.sleep(1); } catch (InterruptedException e) { }
 	}
 	
 	protected void execute() {

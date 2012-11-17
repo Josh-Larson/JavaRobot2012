@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 	
 	public static long sleepTime(long usedTime) {
 		if (splitCPU == 0) return (long) (goalCpuUsage);
-		long sleep = (long) (100 * (goalCpuUsage / splitCPU / 10));
+		long sleep = (long) (goalCpuUsage / splitCPU / 5);
 		if (sleep < 0) sleep = 0;
 		return sleep;
 	}
