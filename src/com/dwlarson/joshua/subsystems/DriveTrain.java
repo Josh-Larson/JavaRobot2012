@@ -44,7 +44,7 @@ public class DriveTrain extends Subsystem {
 	public void driveWithJoystick(boolean arcade, Joystick j1, Joystick j2) {
 		if (arcade) {
 			if (j1 == null) return;
-			double rot = j1.getAxis(Joystick.AxisType.kX);
+			double rot = j1.getAxis(Joystick.AxisType.kTwist);
 			double y = j1.getAxis(Joystick.AxisType.kY);
 			SmartDashboard.putDouble("X", rot);
 			SmartDashboard.putDouble("Y", y);

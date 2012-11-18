@@ -5,7 +5,9 @@ import com.dwlarson.joshua.SingleChannelEncoder;
 import com.dwlarson.joshua.commands.shooter.OutputShooterData;
 
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -20,6 +22,7 @@ public class Shooter extends Subsystem {
 
     private Jaguar top;
     private Jaguar bottom;
+    private Victor turret;
     private SingleChannelEncoder topEncoder;
     private SingleChannelEncoder bottomEncoder;
     private PIDController topPID;
@@ -34,18 +37,29 @@ public class Shooter extends Subsystem {
 		top = new Jaguar(RobotMap.SHOOTER_JAGUAR_TOP);
 		bottom = new Jaguar(RobotMap.SHOOTER_JAGUAR_BOTTOM);
 		topEncoder = new SingleChannelEncoder(
+			1,
 			RobotMap.SHOOTER_ENCODER_TOP_A,
 			RobotMap.SHOOTER_ENCODER_PULSES_SEC,
-			null);
+			top);
 		bottomEncoder = new SingleChannelEncoder(
+			1,
 			RobotMap.SHOOTER_ENCODER_BOTTOM_A,
 			RobotMap.SHOOTER_ENCODER_PULSES_SEC,
-			null);
+			bottom);
 		topPID = new PIDController(.12, .013, 0.0, topEncoder, top);
 		bottomPID = new PIDController(.12, .026, 0.0, bottomEncoder, bottom);
 		topPID.setSetpoint(0);
 		bottomPID.setSetpoint(0);
+		turret = new Victor(RobotMap.SHOOTER_VICTOR_TURRET);
 		ratio = 1;
+    }
+    
+    public void turnWithJoystick(Joystick j) {
+    	turret.set(j.getAxis(Joystick.AxisType.kTwist) / 4);
+    }
+    
+    public void stopTurret() {
+    	turret.set(0);
     }
 	
 	public void disable() {
@@ -96,5 +110,13 @@ public class Shooter extends Subsystem {
 	
 	public double getBottomRate() {
 		return bottomEncoder.getRate();
+	}
+	
+	public SingleChannelEncoder getBottomEncoder() {
+		return bottomEncoder;
+	}
+	
+	public SingleChannelEncoder getTopEncoder() {
+		return topEncoder;
 	}
 }

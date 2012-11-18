@@ -21,14 +21,13 @@ public class OutputShooterData extends CommandBase {
 	}
 	
 	protected void initialize() {
-		SmartDashboard.putString("Debug", "1");
+		
 	}
 	
 	protected void execute() {
 		if (timer.get() >= 0.1) {
-			SmartDashboard.putDouble("Top Shooter", shooter.getTopRate());
-			SmartDashboard.putDouble("Bottom Shooter", shooter.getBottomRate());
-			//SmartDashboard.putString("Debug", "2");
+			SmartDashboard.putInt("Top Shooter", shooter.getTopEncoder().get());
+			SmartDashboard.putInt("Bottom Shooter", shooter.getBottomEncoder().get());
 			timer.reset();
 		}
 	}

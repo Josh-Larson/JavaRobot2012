@@ -17,6 +17,7 @@ public class ShootBall extends CommandGroup {
 	
 	public ShootBall() {
 		addParallel(new PrepareBallToShoot());
+		addSequential(new OutputShooterData());
 		addSequential(new GetShooterUpToSpeed());
 		addSequential(new MoveBallIntoShooter());
 	}

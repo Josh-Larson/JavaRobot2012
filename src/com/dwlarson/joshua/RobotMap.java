@@ -38,6 +38,7 @@ public class RobotMap {
 	public static final int SHOOTER_JAGUAR_BOTTOM       = 3;
 	public static final int SHOOTER_ENCODER_BOTTOM_A    = 5;
 	public static final int SHOOTER_ENCODER_TOP_A       = 6;
+	public static final int SHOOTER_VICTOR_TURRET       = 7;
 	public static final int SHOOTER_ENCODER_PULSES_SEC  = 128;
 	
 	

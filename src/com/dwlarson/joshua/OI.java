@@ -4,6 +4,7 @@ package com.dwlarson.joshua;
 import com.dwlarson.joshua.commands.ramp_manipulator.MoveRampDown;
 import com.dwlarson.joshua.commands.ramp_manipulator.MoveRampUp;
 import com.dwlarson.joshua.commands.shooter.ShootBall;
+import com.dwlarson.joshua.commands.shooter.TurnTurret;
 import com.dwlarson.joshua.commands.drive_train.ToggleTankArcade;
 import com.dwlarson.joshua.commands.collector.CalibrateCollector;
 import com.dwlarson.joshua.commands.collector.MoveBallOutCollector;
@@ -26,6 +27,7 @@ public class OI {
 	private Joystick joy2;
 	
 	private JoystickButton shootButton;
+	private JoystickButton turretTurnButton;
 	private JoystickButton rampUpButton;
 	private JoystickButton tankToggleButton;
 	private JoystickButton rampDownButton;
@@ -39,6 +41,7 @@ public class OI {
 		joy2 = new Joystick(RobotMap.COMPUTER_JOYSTICK2);
 		
 		shootButton      = new JoystickButton(joy1, RobotMap.JOYSTICK_SHOOT);
+		turretTurnButton = new JoystickButton(joy1, RobotMap.JOYSTICK_TURRET_MAN_TURN);
 		rampUpButton     = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_UP);
 		tankToggleButton = new JoystickButton(joy1, RobotMap.JOYSTICK_TANK_ARCADE_TOGGLE);
 		rampDownButton   = new JoystickButton(joy1, RobotMap.JOYSTICK_RAMP_DOWN);
@@ -48,6 +51,7 @@ public class OI {
 		SmartDashboard.putData("Calibrate", calibrateButton);
 		
 		shootButton.whenReleased(new ShootBall());
+		turretTurnButton.whileHeld(new TurnTurret());
 		rampUpButton.whileHeld(new MoveRampUp());
 		tankToggleButton.whenReleased(new ToggleTankArcade());
 		rampDownButton.whileHeld(new MoveRampDown());

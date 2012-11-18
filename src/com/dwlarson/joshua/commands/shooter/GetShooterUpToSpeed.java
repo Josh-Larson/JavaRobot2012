@@ -1,6 +1,5 @@
 package com.dwlarson.joshua.commands.shooter;
 
-import com.dwlarson.joshua.Robot;
 import com.dwlarson.joshua.RobotMap;
 import com.dwlarson.joshua.commands.CommandBase;
 
@@ -30,7 +29,7 @@ public class GetShooterUpToSpeed extends CommandBase {
 	}
 	
 	public boolean isFinished() {
-		return shooter.isSpeedClose() || Robot.disabled;
+		return isTimedOut();
 	}
 	
 	public void interrupted() {
