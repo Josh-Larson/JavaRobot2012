@@ -40,14 +40,11 @@ public class MoveBallIntoCollector extends CommandBase {
 			moved = false;
 		}
 		
-		if (transition) {
-			collector.moveUp();
-			try { Thread.sleep(1000); } catch (InterruptedException e) { }
-			moved = true;
-		}
-		
 		if (top) {
 			collector.disableLifter();
+		} else if (transition) {
+			collector.moveUp();
+			moved = true;
 		}
 		
 		if (!moved) {
